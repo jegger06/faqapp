@@ -7,16 +7,23 @@ import { Question } from '../../models/Question';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+  @Output() questionAdded = new EventEmitter<Question>();
   text:string;
   answer:string;
+  hide:string = 'true';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  addQuestion() {
-
+  addQuestion(f) {
+    if(f.valid) {
+      this.questionAdded.emit({text:this.text, answer:this.answer, hide:this.hide});
+      f.reset();
+    } else {
+      return;
+    }
   }
 
 }

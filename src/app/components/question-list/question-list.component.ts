@@ -16,7 +16,25 @@ export class QuestionListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.questions = this.dataService.getQuestions();
+    this.dataService.getQuestions().subscribe(res => {
+      console.log(res);
+      this.questions = res;
+    });
+  }
+
+  addQuestion(question:Question) {
+    this.dataService.addQuestion(question).subscribe(res => {
+      console.log(res);
+      this.ngOnInit();
+    });
+  }
+
+  removeQuestion(question:Question) {
+    this.dataService.removeQuestion(question).subscribe(res => {
+      console.log(res);
+      let i = this.questions.indexOf(question);
+      this.questions.splice(i, 1);
+    });
   }
 
 }

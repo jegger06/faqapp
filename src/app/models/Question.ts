@@ -1,5 +1,6 @@
 export interface Question {
+    id?:number,
     text: string,
     answer: string,
-    hide: boolean
+    hide: string
 }
